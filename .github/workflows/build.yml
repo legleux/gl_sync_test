@@ -10,9 +10,9 @@ jobs:
   build:
     strategy:
       matrix:
-        platform: [ {platform: "linux/amd64", runner: '["ubuntu-20.04"]'}, {platform: "linux/arm64", runner: '["linux"]'} ]
+        platform: [ {platform: "linux/amd64", runner: "one"}, {platform: "linux/arm64", runner: "two"} ]
 
-    runs-on: ${{fromJSON(['ubuntu-latest', 'ubuntu-22.04'])}}
+    runs-on: "${{fromJSON(['ubuntu-latest', 'ubuntu-22.04'])}}"
 
     steps:
       - name: Run it
