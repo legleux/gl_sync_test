@@ -12,7 +12,7 @@ jobs:
       matrix:
         platform: [ {platform: "linux/amd64", runner: "one"}, {platform: "linux/arm64", runner: "two"} ]
 
-    runs-on: "${{ fromJSON('[ubuntu-latest, ubuntu-22.04])' }}"
+    runs-on: "${{ fromJSON(matrix.platform.platform) }}"
 
     steps:
       - name: Run it
