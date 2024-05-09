@@ -10,7 +10,10 @@ jobs:
   build:
     strategy:
       matrix:
-        platform: [ {platform: "linux/amd64", runner: "[\"ubuntu-20.04\", \"ubuntu-20.04\"]"}, {platform: "linux/arm64", runner: "[\"ubuntu-latest\", \"ubuntu-latest\"]"} ]
+        platform: [
+          {platform: "linux/amd64", runner: '["ubuntu-20.04", "ubuntu-20.04"]'},
+          {platform: "linux/arm64", runner: '["ubuntu-latest", "ubuntu-latest"]'}
+          ]
 
     runs-on: ${{ fromJSON(matrix.platform.runner) }}
 
