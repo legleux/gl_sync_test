@@ -1,0 +1,22 @@
+name: Build matrix mtest
+
+on:
+  push:
+
+env:
+  REGISTRY_IMAGE: legleux/test_image
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        platform: [ {platform: "linux/amd64", runner: "ubuntu:20.04"}, {platform: "linux/arm64", runner: "ubuntu:22.04"} ]
+
+    runs-on: [self-hosted, x-heavy, '${{ matrix.platform.runner }}']
+
+    steps:
+      - name: Run it
+        id: tag_name
+        shell: bash
+        run: |
+          echo "I'm to run on ${{ matrix.platform.runner }} with ${{ matrix.platform.platform }}"
