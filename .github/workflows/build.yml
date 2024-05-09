@@ -12,7 +12,7 @@ jobs:
       matrix:
         platform: [ {platform: "linux/amd64", runner: "one"}, {platform: "linux/arm64", runner: "two"} ]
 
-    runs-on: "${{ fromJSON(matrix.platform.platform) }}"
+    runs-on: "${{ fromJSON(matrix.platform.runner) }}"
 
     steps:
       - name: Run it
