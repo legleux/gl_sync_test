@@ -10,9 +10,9 @@ jobs:
   build:
     strategy:
       matrix:
-        platform: [ {platform: "linux/amd64", runner: "ubuntu-20.04"}, {platform: "linux/arm64", runner: "ubuntu-22.04"} ]
+        platform: [ {platform: "linux/amd64", runner: ["ubuntu-20.04"]}, {platform: "linux/arm64", runner: '["ubuntu-latest", "ubuntu-22.04"]'} ]
 
-    runs-on: ['${{ matrix.platform.runner }}']
+    runs-on: ["${{ fromjson(matrix.platform.runner) }}"]
 
     steps:
       - name: Run it
