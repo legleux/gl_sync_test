@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        platform: [ {platform: "linux/amd64", runner: "one"}, {platform: "linux/arm64", runner: "two"} ]
+        platform: [ {platform: "linux/amd64", runner: "[one, two]"}, {platform: "linux/arm64", runner: "[three, four]"} ]
 
     runs-on: "${{ fromJSON(matrix.platform.runner) }}"
 
