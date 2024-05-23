@@ -2,10 +2,7 @@ name: Build a thing
 
 on:
   push:
-  workflow_run:
   pull_request:
-
-
 
 jobs:
   build:
