@@ -1,21 +1,19 @@
-name: Build matrix mtest
+name: Build a thing
 
 on:
   push:
-
-env:
-  REGISTRY_IMAGE: legleux/test_image
+  pull_request:
 
 jobs:
   build:
     strategy:
       matrix:
         platform: [
-          {platform: "linux/amd64", runner: '["ubuntu-20.04", "ubuntu-20.04"]'},
-          {platform: "linux/arm64", runner: '["ubuntu-latest", "ubuntu-latest"]'}
+          {platform: "linux/amd64", runner: '["x-heavy", "X86"]'},
+          {platform: "linux/arm64", runner: '["ARM64", "ubuntu-latest"]'}
           ]
 
-    runs-on: ${{ fromJSON(matrix.platform.runner) }}
+    runs-on: [self-hosted, "${{ fromJSON(matrix.platform.runner) }}"]
 
     steps:
       - name: Run it
@@ -23,3 +21,17 @@ jobs:
         shell: bash
         run: |
           echo "I'm to run on ${{ matrix.platform.runner }} with ${{ matrix.platform.platform }}"
+
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Make something
+        run: echo "I'm some app" > the_app
+
+      - name: Store code coverage file
+        uses: actions/upload-artifact@v4
+        with:
+          name: coveragemicroservicea-${{ github.sha }}
+          path: coveragemicroservicea.out

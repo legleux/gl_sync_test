@@ -1,0 +1,21 @@
+name: Publish Docker images
+
+on:
+  workflow_run:
+    workflows: [Build a thing]
+    types: [completed]
+    # types: [requested]
+    branches: [main, release, develop]
+
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - run: echo 'The triggering workflow passed'
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: |
+          echo 'I won't bpush because the triggering workflow failed'
